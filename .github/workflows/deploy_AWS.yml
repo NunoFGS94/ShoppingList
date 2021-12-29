@@ -9,6 +9,9 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./AWS_Backend/ShoppingListService
     strategy:
       matrix:
         node-version: [14.x]
@@ -18,11 +21,10 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm  ci
-        working-directory: ./AWS_Backend/ShoppingListService
+      - run: npm ci
       - name: serverless deploy
         uses: serverless/github-action@master
         with:
-          args: deploy -c AWS_Backend/ShoppingListService/serverless.ts
+          args: deploy
         env:
           SERVERLESS_ACCESS_KEY: ${{ secrets.SERVERLESS_ACCESS_KEY }}
