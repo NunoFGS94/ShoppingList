@@ -19,7 +19,7 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm  ci
-        woring-directory: ./AWS_Backend/ShoppingListService
+        working-directory: ./AWS_Backend/ShoppingListService
       - name: serverless deploy
         uses: serverless/github-action@master
         with:
